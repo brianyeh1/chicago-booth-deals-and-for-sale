@@ -15,7 +15,6 @@
 #  price           :float
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  item_id         :integer
 #  seller_id       :integer
 #
 class Item < ApplicationRecord

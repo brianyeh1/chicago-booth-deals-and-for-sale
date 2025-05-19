@@ -6,6 +6,7 @@
 #  category        :string
 #  delivery_method :string
 #  description     :string
+#  name            :string
 #  payment_method  :string
 #  picture_1       :string
 #  picture_2       :string

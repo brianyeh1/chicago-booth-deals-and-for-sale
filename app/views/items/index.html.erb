@@ -33,15 +33,52 @@
 
 <hr>
 
-<ul>
-  <% @list_of_items.each do |a_item| %>
-    <li>
-      <a href="/items/<%= a_item.id %>">
-        <%= a_item.id %>
-      </a>
+<table border="1">
+  <tr>
+    <th>
+      Category
+    </th>
 
-      <hr>
+    <th>
+      Item
+    </th>
 
-    </li>
+    <th>
+    </th>
+
+    <th>
+      Price
+    </th>
+
+    <td>
+    Last updated
+    </td>
+
+  </tr>
+
+<% @list_of_items.each do |a_item| %>
+
+<tr>
+      <td>
+        <%= a_item.category %>
+      </td>
+      
+      <td>
+        <%= a_item.name %>
+      </td>
+
+      <td>
+        <img src="<%= a_item.picture_1 %>" height="300px">
+      </td>
+
+      <td>
+        <%= a_item.price.to_fs(:currency) %>
+      </td>
+
+      <td>
+        <%= a_item.updated_at.strftime("%b %d, %l:%M%p") %>
+      </td>
+
+    </tr>
   <% end %>
-</ul>
+</table>

@@ -1,0 +1,22 @@
+# == Schema Information
+#
+# Table name: items
+#
+#  id              :bigint           not null, primary key
+#  category        :string
+#  delivery_method :string
+#  description     :string
+#  payment_method  :string
+#  picture_1       :string
+#  picture_2       :string
+#  picture_3       :string
+#  picture_4       :string
+#  picture_5       :string
+#  price           :float
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  item_id         :integer
+#  seller_id       :integer
+#
+class Item < ApplicationRecord
+end

@@ -1,0 +1,47 @@
+<div>
+  <div>
+    <h1>
+      All listings
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new listing
+    </h2>
+
+    <form action="/insert_board" method="post">
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name">
+      </div>
+
+      <button>
+        Add listing
+      </button>
+    </form>
+
+  </div>
+</div>
+
+<hr>
+
+<ul>
+  <% @list_of_items.each do |a_item| %>
+    <li>
+      <a href="/items/<%= a_item.id %>">
+        <%= a_item.id %>
+      </a>
+
+      <hr>
+
+    </li>
+  <% end %>
+</ul>

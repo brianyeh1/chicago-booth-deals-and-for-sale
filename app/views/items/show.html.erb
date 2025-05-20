@@ -27,6 +27,8 @@
 <div> <b>Price:</b> <%= @the_item.price.to_fs(:currency) %> </div>
 <div> <b>Seller:</b> <%= @the_seller.first_name %> <%= @the_seller.last_name %></div>
 
+<div><img src="<%= @the_item.picture_1_url %>" height="300px"></div>
+
 <div> <b>Description:</b> <%= @the_item.description %> </div>
 
 <div> <b>Payment method:</b> <%= @the_item.payment_method %> </div>

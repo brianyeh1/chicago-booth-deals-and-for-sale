@@ -17,7 +17,7 @@
           <b>Category:</b>
         </label>
         <select id="category" name="category">
-          <% Category.order({ :name => :asc }).each do |a_category| %>
+          <% Category.order({ :category => :asc }).each do |a_category| %>
             <option value="<%= a_category.category %>">
               <%= a_category.category %>
             </option>

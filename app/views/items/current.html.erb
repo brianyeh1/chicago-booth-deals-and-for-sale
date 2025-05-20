@@ -15,12 +15,11 @@
           <b>Category:</b>
         </label>
         <select id="category" name="category">
-            <option value="Book">Book</option>
-            <option value="Clothing">Clothing</option>
-            <option value="Electronic">Electronic</option>
-            <option value="Furniture & home appliance">Furniture & home appliance</option>
-            <option value="Ticket">Ticket</option>
-            <option value="Other">Other</option>
+          <% Category.order({ :name => :asc }).each do |a_category| %>
+            <option value="<%= a_category.category %>">
+              <%= a_category.category %>
+            </option>
+          <% end %>
         </select>
       </div>
 

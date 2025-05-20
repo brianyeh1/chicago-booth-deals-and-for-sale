@@ -4,6 +4,7 @@
       All listings
     </h1>
   </div>
+  <i>Only listings updated in the last 90 days will show up here</i>
 </div>
 
 <hr>
@@ -44,7 +45,7 @@
 
   </tr>
 
-<% @list_of_items.each do |a_item| %>
+<% @list_of_items.where({ :updated_at => 90.days.ago..Time.current}).each do |a_item| %>
 
 <tr>
       <td>

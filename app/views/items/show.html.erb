@@ -11,8 +11,7 @@
         <a href="/edit_item/<%= @the_item.id %>">
          Edit listing
         </a>
-      </div>
-      <div>
+      
         <a href="/delete_item/<%= @the_item.id %>">
           Delete listing
         </a>
@@ -26,8 +25,7 @@
 <div> <b>Category:</b> <%= @the_item.category %> </div>
 <div> <b>Price:</b> <%= @the_item.price.to_fs(:currency) %> </div>
 <div> <b>Seller:</b> <%= @the_seller.first_name %> <%= @the_seller.last_name %></div>
-
-<div><img src="<%= @the_item.picture_1_url %>" height="300px"></div>
+<div><img src="<%= @the_item.picture_1_url %>" height="200px"> <img src="<%= @the_item.picture_2_url %>" height="200px"> <img src="<%= @the_item.picture_3_url %>" height="200px"> <img src="<%= @the_item.picture_4_url %>" height="200px"> <img src="<%= @the_item.picture_5_url %>" height="200px"></div>
 
 <div> <b>Description:</b> <%= @the_item.description %> </div>
 

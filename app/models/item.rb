@@ -23,4 +23,8 @@ class Item < ApplicationRecord
   validates(:description, presence: true)
   validates(:price, presence: true)
   mount_uploader :picture_1, Picture1Uploader
+  mount_uploader :picture_2, Picture2Uploader
+  mount_uploader :picture_3, Picture3Uploader
+  mount_uploader :picture_4, Picture4Uploader
+  mount_uploader :picture_5, Picture5Uploader
 end

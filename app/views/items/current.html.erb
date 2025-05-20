@@ -14,8 +14,14 @@
         <label for="category">
           <b>Category:</b>
         </label>
-
-        <input type="text" id="category" name="category" value="<%= @the_item.category %>">
+        <select id="category" name="category">
+            <option value="Book">Book</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Electronic">Electronic</option>
+            <option value="Furniture & home appliance">Furniture & home appliance</option>
+            <option value="Ticket">Ticket</option>
+            <option value="Other">Other</option>
+        </select>
       </div>
 
       <div>

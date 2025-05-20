@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
 #Listing pages
-
-get("/", { :controller => "boards", :action => "index"})
+root to: "boards#index"
+#get("/", { :controller => "boards", :action => "index"})
   
 #Create new listing
 

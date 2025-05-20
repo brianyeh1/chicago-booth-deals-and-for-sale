@@ -27,12 +27,12 @@ class BoardsController < ApplicationController
     the_item.delivery_method = params.fetch("delivery_method")
     the_item.seller_id = current_user.id
 
-   # if the_item.valid?
-   #   the_item.save
-   #   redirect_to("/item/#{the_item.id}"), { :notice => "Listing created successfully." })
-   # else
-   #   redirect_to("/new_listing", { :alert => the_item.errors.full_messages.to_sentence })
-   # end
+    if the_item.valid?
+      the_item.save
+      redirect_to("/item/#{the_item.id}", { :notice => "Listing created successfully." })
+    else
+      redirect_to("/new_listing", { :alert => the_item.errors.full_messages.to_sentence })
+    end
   end
 
 end

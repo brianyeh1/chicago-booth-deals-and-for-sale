@@ -8,8 +8,17 @@ class BoardsController < ApplicationController
   end
 
   def add
-
     render({ :template => "items/add" })
+  end
+
+  def show
+    the_id = params.fetch("path_id")
+
+    matching_item = Item.where({ :id => the_id })
+
+    @the_item = matching_item.at(0)
+
+    render({ :template => "items/show" })
   end
 
   def create

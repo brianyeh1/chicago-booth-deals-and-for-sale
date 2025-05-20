@@ -10,23 +10,11 @@
 
 <div>
   <div>
+    <% if current_user != nil %>
     <h2>
       <a href="/new_listing"> Create a new listing </a>
     </h2>
-
-    <form action="/insert_board" method="post">
-      <div>
-        <label for="name_box">
-          Name
-        </label>
-
-        <input type="text" id="name_box" name="query_name">
-      </div>
-
-      <button>
-        Add listing
-      </button>
-    </form>
+    <% end %>
 
   </div>
 </div>
@@ -64,7 +52,7 @@
       </td>
       
       <td>
-        <%= a_item.name %>
+        <a href="/item/<%=a_item.id%>"><%= a_item.name %></a>
       </td>
 
       <td>

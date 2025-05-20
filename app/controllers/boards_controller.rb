@@ -17,6 +17,8 @@ class BoardsController < ApplicationController
     matching_item = Item.where({ :id => the_id })
 
     @the_item = matching_item.at(0)
+    matching_user = User.where({ :id => @the_item.seller_id })
+    @the_seller = matching_user.at(0)
 
     render({ :template => "items/show" })
   end

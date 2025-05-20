@@ -4,6 +4,9 @@ class BoardsController < ApplicationController
 
     @list_of_items = matching_items.order({ :created_at => :desc })
 
+     # params.fetch("q", {}) ensures we always pass a Hash to ransack
+     @q = Item.ransack(({}))
+
     render({ :template => "items/index" })
   end
 
@@ -103,6 +106,13 @@ def update
     the_item.destroy
 
     redirect_to("/", { :notice => "Listing deleted successfully."} )
+  end
+
+  def search
+     # params.fetch("q", {}) ensures we always pass a Hash to ransack
+     @q = Item.ransack(params.fetch("q", {}))
+     @items = @q.result
+     render({ :template => "items/search_result" })
   end
 
 end

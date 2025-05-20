@@ -28,4 +28,13 @@ class Item < ApplicationRecord
   mount_uploader :picture_3, Picture3Uploader
   mount_uploader :picture_4, Picture4Uploader
   mount_uploader :picture_5, Picture5Uploader
+  
+  def self.ransackable_attributes(auth_object = nil)
+    return ["name", "description"]
+  end
+
+  # allow no associations (since you’re only searching your own columns)
+  def self.ransackable_associations(auth_object = nil)
+    return []
+  end
 end

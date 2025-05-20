@@ -1,0 +1,23 @@
+ /* make the nav bar a flex container */
+ nav {
+   display: flex;
+   align-items: center;
+   /* optional if you want items to wrap on small screens */
+   flex-wrap: wrap;
+ }
+
+ /* space out every link and form element uniformly */
+ nav a,
+ nav form label,
+ nav form input,
+ nav form input[type="submit"] {
+   display: inline-block;
+   margin-right: 0.75em;
+ }
+
+ /* make the form itself a flex container too */
+ nav form {
+   display: flex;
+   align-items: center;
+   margin: 0; /* override any default form margins */
+ }

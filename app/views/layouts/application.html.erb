@@ -8,11 +8,21 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <link rel="stylesheet" href="/search.css">
   </head>
 
   <body>
       <nav>
       <a href="/">All listings</a>
+      
+      <%= search_form_for(@q, { :url => search_result_path, :method => :get }) do |f| %>
+  
+          <%= f.label(:name_or_description_cont, "Search for") %>
+          <%= f.text_field(:name_or_description_cont, { :placeholder => "e.g., Pickleball paddles" }) %>
+
+        <%= f.submit("Search", { :class => "btn btn-primary" }) %>
+      <% end %>
 
       <% if current_user != nil %>
       <a href="/my_listing">My listing</a>

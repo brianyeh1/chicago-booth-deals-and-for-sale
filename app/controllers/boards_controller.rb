@@ -33,7 +33,7 @@ class BoardsController < ApplicationController
     the_item.picture_3 = params.fetch("picture_3")
     the_item.picture_4 = params.fetch("picture_4")
     the_item.picture_5 = params.fetch("picture_5")
-    the_item.price = params.fetch("price")
+    the_item.price = params.fetch("price").to_f
     the_item.payment_method = params.fetch("payment_method")
     the_item.delivery_method = params.fetch("delivery_method")
     the_item.seller_id = current_user.id
@@ -44,6 +44,56 @@ class BoardsController < ApplicationController
     else
       redirect_to("/new_listing", { :alert => the_item.errors.full_messages.to_sentence })
     end
+  end
+
+def current
+    the_id = params.fetch("path_id")
+    @the_item = Item.where({ :id => the_id }).at(0)
+    render({ :template => "items/current" })
+end
+
+def update
+    the_id = params.fetch("path_id")
+    the_item = Item.where({ :id => the_id }).at(0)
+
+    the_item.category = params.fetch("category")
+    the_item.name = params.fetch("name")
+    the_item.description = params.fetch("description")
+    if params.fetch("picture_1", nil)
+      the_item.picture_1 = params.fetch("picture_1")
+    end
+    if params.fetch("picture_2", nil)
+    the_item.picture_2 =  params.fetch("picture_2")
+    end
+    if params.fetch("picture_3", nil)
+    the_item.picture_3 = params.fetch("picture_3")
+    end
+    if params.fetch("picture_4", nil)
+    the_item.picture_4 = params.fetch("picture_4")
+    end
+    if params.fetch("picture_5", nil)
+    the_item.picture_5 = params.fetch("picture_5")
+    end
+    the_item.price = params.fetch("price").to_f
+    the_item.payment_method = params.fetch("payment_method")
+    the_item.delivery_method = params.fetch("delivery_method")
+    the_item.seller_id = current_user.id
+
+    if the_item.valid?
+      the_item.save
+      redirect_to("/item/#{the_item.id}", { :notice => "Listing updated successfully."} )
+    else
+      redirect_to("/item/#{the_item.id}", { :alert => the_item.errors.full_messages.to_sentence })
+    end
+  end
+
+  def destroy
+    the_id = params.fetch("path_id")
+    the_item = Item.where({ :id => the_id }).at(0)
+
+    the_item.destroy
+
+    redirect_to("/", { :notice => "Listing deleted successfully."} )
   end
 
 end

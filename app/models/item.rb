@@ -22,6 +22,7 @@ class Item < ApplicationRecord
   validates(:name, presence: true)
   validates(:description, presence: true)
   validates(:price, presence: true)
+  validates(:price, numericality: true)
   mount_uploader :picture_1, Picture1Uploader
   mount_uploader :picture_2, Picture2Uploader
   mount_uploader :picture_3, Picture3Uploader

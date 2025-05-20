@@ -1,23 +1,21 @@
 <div>
   <div>
     <h1>
-      Create a new listing
+      Edit "<%= @the_item.name %>"
     </h1>
   </div>
 </div>
 
-<hr>
-
 <div>
   <div>
 
-    <form action="/create_listing" method="post" enctype="multipart/form-data">
+    <form action="/modify_listing/<%= @the_item.id %>" method="post" enctype="multipart/form-data">
       <div>
         <label for="category">
           <b>Category:</b>
         </label>
 
-        <input type="text" id="category" name="category">
+        <input type="text" id="category" name="category" value="<%= @the_item.category %>">
       </div>
 
       <div>
@@ -25,15 +23,7 @@
           <b>Name:</b>
         </label>
 
-        <input type="text" id="name" name="name">
-      </div>
-
-      <div>
-        <label for="description">
-          <b>Item description:</b>
-        </label>
-
-        <input type="text" id="description" name="description">
+        <input type="text" id="name" name="name" value="<%= @the_item.name %>">
       </div>
 
       <div>
@@ -41,7 +31,15 @@
           <b>Selling price:</b> $
         </label>
 
-        <input type="text" id="price" name="price">
+        <input type="text" id="price" name="price" value="<%= @the_item.price %>">
+      </div>
+
+      <div>
+        <label for="description">
+          <b>Item description:</b>
+        </label>
+
+        <textarea id="description" name="description" cols="50" rows="5"><%= @the_item.description %></textarea>
       </div>
 
       <div>
@@ -89,7 +87,7 @@
           <b>Payment method:</b>
         </label>
 
-        <input type="text" id="payment_method" name="payment_method">
+        <input type="text" id="payment_method" name="payment_method" value="<%= @the_item.payment_method %>">
       </div>
 
       <div>
@@ -97,11 +95,11 @@
           <b>Delivery method:</b>
         </label>
 
-        <input type="text" id="delivery_method" name="delivery_method">
+        <input type="text" id="delivery_method" name="delivery_method" value="<%= @the_item.delivery_method %>">
       </div>
 
       <button>
-        <b>Create new listing</b>
+        <b>Update listing</b>
       </button>
     </form>
 

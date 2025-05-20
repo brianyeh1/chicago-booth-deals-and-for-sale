@@ -8,11 +8,11 @@
     <div>
     <% if current_user.id == @the_item.seller_id %>
       <div>
-        <a href="/edit_item/<%= @the_item.id %>">
+        <a href="/current_listing/<%= @the_item.id %>">
          Edit listing
         </a>
       
-        <a href="/delete_item/<%= @the_item.id %>">
+        <a href="/delete_listing/<%= @the_item.id %>">
           Delete listing
         </a>
       </div>
@@ -32,3 +32,5 @@
 <div> <b>Payment method:</b> <%= @the_item.payment_method %> </div>
 
 <div> <b>Delivery method:</b> <%= @the_item.delivery_method %> </div>
+
+<div> <b>Last updated:</b> <%= @the_item.updated_at.strftime("%b %d, %l:%M%p") %> </div>

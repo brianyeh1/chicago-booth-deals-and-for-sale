@@ -1,0 +1,73 @@
+<div>
+  <div>
+    <h1>
+      My listings
+    </h1>
+  </div>
+  <i>Only listings updated in the last 90 days will show up here</i>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <% if current_user != nil %>
+    <h2>
+      <a href="/new_listing"> Create a new listing </a>
+    </h2>
+    <% end %>
+
+  </div>
+</div>
+
+<hr>
+
+<table border="1">
+  <tr>
+    <th>
+      Category
+    </th>
+
+    <th>
+      Item
+    </th>
+
+    <th>
+    </th>
+
+    <th>
+      Price
+    </th>
+
+    <th>
+    Last updated
+    </th>
+
+  </tr>
+
+<% @list_of_items.where({ :updated_at => 90.days.ago..Time.current}).each do |a_item| %>
+
+<tr>
+      <td>
+        <%= a_item.category %>
+      </td>
+      
+      <td>
+        <a href="/item/<%=a_item.id%>"><%= a_item.name %></a>
+      </td>
+
+      <td>
+        <img src="<%= a_item.picture_1_url %>" height="100px">
+      </td>
+
+      <td>
+        <%= a_item.price.to_fs(:currency) %>
+      </td>
+
+      <td>
+        <%= a_item.updated_at.strftime("%b %d, %l:%M%p") %>
+      </td>
+
+    </tr>
+  <% end %>
+</table>

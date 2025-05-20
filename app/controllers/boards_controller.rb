@@ -7,6 +7,15 @@ class BoardsController < ApplicationController
     render({ :template => "items/index" })
   end
 
+  def mylisting
+    seller_id = current_user.id
+    matching_items = Item.where({ :seller_id => seller_id})
+
+    @list_of_items = matching_items.order({ :created_at => :desc })
+
+    render({ :template => "items/mylisting" })
+  end
+
   def add
     render({ :template => "items/add" })
   end

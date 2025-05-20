@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
 #Listing pages
 root to: "boards#index"
+get("/my_listing", { :controller => "boards", :action => "mylisting"})
+get("/my_listing", { :controller => "boards", :action => "savedlisting"})
   
 #Create new listing
 
@@ -14,8 +16,7 @@ get("/current_listing/:path_id", { :controller => "boards", :action => "current"
 post("/modify_listing/:path_id", { :controller => "boards", :action => "update" })
 get("/delete_listing/:path_id", { :controller => "boards", :action => "destroy" })
 
-#Individual listing pages
-
+#Individual item pages
 get("/item/:path_id", { :controller => "boards", :action => "show"})
 
 end

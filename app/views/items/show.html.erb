@@ -8,11 +8,11 @@
     <div>
     <% if current_user.id == @the_item.seller_id %>
       <div>
-        <a href="/current_listing/<%= @the_item.id %>">
+        <a href="/current_listing/<%= @the_item.id %>" class="btn btn-warning">
          Edit listing
         </a>
       
-        <a href="/delete_listing/<%= @the_item.id %>"
+        <a href="/delete_listing/<%= @the_item.id %>" class="btn btn-danger"
         onclick="return confirm('Are you sure you want to delete this item?');"
         >
           Delete listing
@@ -37,4 +37,10 @@
 
 <div> <b>Last updated:</b> <%= @the_item.updated_at.strftime("%b %d, %l:%M%p") %> </div>
 
-<div> <a href="/save_listing/<%= @the_item.id %>">Save this listing</a>
+<% if current_user != nil %>
+  <div> <a href="/save_listing/<%= @the_item.id %>" class="btn btn-info">Save this listing</a>
+<% else %>
+  <div> <a href="/users/sign_in/" class="btn btn-info"
+  onclick="return confirm('Sign in to save this listing');"
+  >Save this listing</a>
+<% end %>

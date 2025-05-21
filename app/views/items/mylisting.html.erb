@@ -11,9 +11,11 @@
 <div>
   <div>
     <% if current_user != nil %>
-    <h2>
-      <a href="/new_listing"> Create a new listing </a>
-    </h2>
+      <a href="/new_listing" class="btn btn-success"> Create a new listing </a>
+    <% else %>
+      <div> <a href="/users/sign_in/" class="btn btn-success"
+      onclick="return confirm('Sign in to create a new listing');"
+      >Create a new listing</a>
     <% end %>
 
   </div>
@@ -32,6 +34,7 @@
     </th>
 
     <th>
+      Picture
     </th>
 
     <th>

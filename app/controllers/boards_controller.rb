@@ -4,9 +4,6 @@ class BoardsController < ApplicationController
 
     @list_of_items = matching_items.order({ :created_at => :desc })
 
-     # params.fetch("q", {}) ensures we always pass a Hash to ransack
-     @q = Item.ransack(({}))
-
     render({ :template => "items/index" })
   end
 

@@ -27,10 +27,8 @@ class BoardsController < ApplicationController
   end
 
   def viewsavedlisting
-    user_id = current_user.id
-    matching_save = Save.where({ :user_id => user_id})
-    matching_save.each do |a_item|
-    @list_of_items = matching_items.order({ :created_at => :desc })
+    user_id = User.where({ :id => current_user.id}).at(0)
+    @list_of_items = user_id.user.order({ :created_at => :desc })
 
     render({ :template => "items/savedlisting" })
   end

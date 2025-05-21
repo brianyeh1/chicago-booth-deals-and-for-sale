@@ -6,6 +6,10 @@
   </div>
 </div>
 
+<hr>
+
+<% if current_user.id == @the_item.seller_id%>
+
 <div>
   <div>
 
@@ -110,3 +114,8 @@
 
   </div>
 </div>
+
+<% else %>
+
+<div><i> Error: You cannot edit a listing that you are not a seller for.</i></div>
+<% end %>

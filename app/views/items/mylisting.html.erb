@@ -23,6 +23,8 @@
 
 <hr>
 
+<% if @list_of_items.at(0) != nil %>
+
 <table border="1">
   <tr>
     <th>
@@ -73,3 +75,9 @@
     </tr>
   <% end %>
 </table>
+
+<% else %>
+
+You have no listing
+
+<% end %>

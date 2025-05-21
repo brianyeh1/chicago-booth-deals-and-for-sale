@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      <%= @Category %> listings
+      <%= @the_category %> listings
     </h1>
   </div>
 </div>
@@ -22,6 +22,8 @@
 </div>
 
 <hr>
+
+<% if @list_of_items.at(0) != nil %>
 
 <table border="1">
   <tr>
@@ -73,3 +75,9 @@
     </tr>
   <% end %>
 </table>
+
+<% else %>
+
+There is no listing
+
+<% end %>

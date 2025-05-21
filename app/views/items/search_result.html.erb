@@ -24,6 +24,8 @@
 
 <hr>
 
+<% if @items.at(0) != nil %>
+
 <table border="1">
   <tr>
     <th>
@@ -74,3 +76,9 @@
     </tr>
   <% end %>
 </table>
+
+<% else %>
+
+<div> No item match your search </div>
+
+<% end %>

@@ -10,29 +10,77 @@
 
 <% if current_user.id != nil %>
 
-<div><h2> Messages as seller</hr></div>
+<div><h2> Messages as seller</h2></div>
 
-<div>
-  <div>
+<table border="1">
+  <tr>
+    <th>
+      Item
+    </th>
 
-    <b>Item</b>: <%=@matching_item.name %>
-    <form action="/send_message/<%= @matching_item.id %>" method="post" enctype="multipart/form-data">
-      <div>
-        <label for="message">
-        </label>
+    <th>
+      Buyer
+    </th>
 
-        <textarea id="message" name="message" cols="50" rows="5"></textarea>
-      </div>
+    <th>
+      Date of last message
+    </th>
+  </tr>
 
-      <button>
-        <b>Send message</b>
-      </button>
-    </form>
+  <% @seller_unique_messages.each.do | a_message | %>
+  <tr>
+    <td>
+      <%= Item.where({ :id => a_message.item_id }).at(0).name %>
+    </td>
+    
+    <td>
+      <%= User.where({ :id => a_message.buyer_id }).at(0).first_name %> <%= User.where({ :id => a_message.buyer_id }).at(0).last_name %>
+    </td>
 
-  </div>
-</div>
+    <td>
+      <%= a_message.updated_at.strftime("%b %d, %l:%M%p") %>
+    </td>
 
-<div><h2> Messages as buyer</hr></div>
+  </tr>
+  <% end %>
+</table>
+
+<hr>
+
+<div><h2> Messages as buyer</h2></div>
+
+<table border="1">
+  <tr>
+    <th>
+      Item
+    </th>
+
+    <th>
+      Seller
+    </th>
+
+    <th>
+      Date of last message
+    </th>
+  </tr>
+
+<% @buyer_unique_messages.each.do | b_message | %>
+
+  <tr>
+    <td>
+      <%= Item.where({ :id => b_message.item_id }).at(0).name %>
+    </td>
+    
+    <td>
+      <%= User.where({ :id => b_message.buyer_id }).at(0).first_name %> <%= User.where({ :id => b_message.buyer_id }).at(0).last_name %>
+    </td>
+
+    <td>
+      <%= b_message.updated_at.strftime("%b %d, %l:%M%p") %>
+    </td>
+  </tr>
+    <% end %>
+</table>
 
 <% else %>
 

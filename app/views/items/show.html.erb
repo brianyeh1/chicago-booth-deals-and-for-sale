@@ -12,7 +12,9 @@
          Edit listing
         </a>
       
-        <a href="/delete_listing/<%= @the_item.id %>">
+        <a href="/delete_listing/<%= @the_item.id %>"
+        onclick="return confirm('Are you sure you want to delete this item?');"
+        >
           Delete listing
         </a>
       </div>

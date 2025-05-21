@@ -54,11 +54,21 @@ class BoardsController < ApplicationController
     the_item.category = params.fetch("category")
     the_item.name = params.fetch("name")
     the_item.description = params.fetch("description")
-    the_item.picture_1 = params.fetch("picture_1")
+    if params.fetch("picture_1", nil)
+      the_item.picture_1 = params.fetch("picture_1")
+    end
+    if params.fetch("picture_2", nil)
     the_item.picture_2 =  params.fetch("picture_2")
+    end
+    if params.fetch("picture_3", nil)
     the_item.picture_3 = params.fetch("picture_3")
+    end
+    if params.fetch("picture_4", nil)
     the_item.picture_4 = params.fetch("picture_4")
+    end
+    if params.fetch("picture_5", nil)
     the_item.picture_5 = params.fetch("picture_5")
+    end
     the_item.price = params.fetch("price").to_f
     the_item.payment_method = params.fetch("payment_method")
     the_item.delivery_method = params.fetch("delivery_method")

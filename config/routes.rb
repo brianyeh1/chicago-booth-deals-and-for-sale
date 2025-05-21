@@ -24,8 +24,8 @@ get("/item/:path_id", { :controller => "boards", :action => "show"})
 
 #Messaging pages
 get("/create_message/:path_id", { :controller => "message", :action => "create"})
-post("/send_message/:path_id", { :controller => "message", :action => "send"})
-get("/inbox", { :controller => "message", :action => "index"})
+post("/send_message/:path_id", { :controller => "message", :action => "sent"})
+get("/inbox", { :controller => "message", :action => "inbox"})
 get("/view_message/:path_id", { :controller => "message", :action => "view"})
 post("/reply/:path_id", { :controller => "message", :action => "reply"})
 

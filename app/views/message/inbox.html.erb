@@ -1,18 +1,16 @@
 <div>
   <div>
     <h1>
-      Send a new message
+      My inbox
     </h1>
   </div>
 </div>
 
 <hr>
 
-<% if current_user.id == @matching_item.seller_id %>
+<% if current_user.id != nil %>
 
-<div>You cannot message yourself for an item you're the seller for!</div>
-
-<% elsif current_user != nil %>
+<div><h2> Messages as seller</hr></div>
 
 <div>
   <div>
@@ -34,8 +32,10 @@
   </div>
 </div>
 
+<div><h2> Messages as buyer</hr></div>
+
 <% else %>
 
-<div> Please <a href="/users/sign_in/">sign in</a> to message the seller.</div>
+<div> Please <a href="/users/sign_in/">sign in</a> to view see your inbox.</div>
 
 <% end %>

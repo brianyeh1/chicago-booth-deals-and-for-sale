@@ -11,4 +11,7 @@
 #  seller_id  :integer
 #
 class Message < ApplicationRecord
+    validates(:message, presence: true)
+    validates(:seller_id, presence: true)
+    validates(:buyer_id, presence: true)
 end

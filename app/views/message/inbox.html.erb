@@ -10,77 +10,95 @@
 
 <% if current_user.id != nil %>
 
-<div><h2> Messages as seller</h2></div>
+<div><h3> Messages as seller</h3></div>
 
-<table border="1">
-  <tr>
-    <th>
-      Item
-    </th>
+<% if @seller_unique_messages.at(0) != nil %>
 
-    <th>
-      Buyer
-    </th>
+  <table border="1">
+    <tr>
+      <th>
+        Item
+      </th>
 
-    <th>
-      Date of last message
-    </th>
-  </tr>
+      <th>
+        Buyer
+      </th>
 
-  <% @seller_unique_messages.each.do | a_message | %>
-  <tr>
-    <td>
-      <%= Item.where({ :id => a_message.item_id }).at(0).name %>
-    </td>
-    
-    <td>
-      <%= User.where({ :id => a_message.buyer_id }).at(0).first_name %> <%= User.where({ :id => a_message.buyer_id }).at(0).last_name %>
-    </td>
+      <th>
+        Date of last message
+      </th>
+    </tr>
 
-    <td>
-      <%= a_message.updated_at.strftime("%b %d, %l:%M%p") %>
-    </td>
+    <% @seller_unique_messages.each do | a_message | %>
+    <tr>
+      <td>
+        <%= Item.where({ :id => a_message.item_id }).at(0).name %>
+      </td>
+      
+      <td>
+        <%= User.where({ :id => a_message.buyer_id }).at(0).first_name %> <%= User.where({ :id => a_message.buyer_id }).at(0).last_name %>
+      </td>
 
-  </tr>
-  <% end %>
-</table>
+      <td>
+        <%= a_message.updated_at.strftime("%b %d, %l:%M%p") %>
+      </td>
 
-<hr>
-
-<div><h2> Messages as buyer</h2></div>
-
-<table border="1">
-  <tr>
-    <th>
-      Item
-    </th>
-
-    <th>
-      Seller
-    </th>
-
-    <th>
-      Date of last message
-    </th>
-  </tr>
-
-<% @buyer_unique_messages.each.do | b_message | %>
-
-  <tr>
-    <td>
-      <%= Item.where({ :id => b_message.item_id }).at(0).name %>
-    </td>
-    
-    <td>
-      <%= User.where({ :id => b_message.buyer_id }).at(0).first_name %> <%= User.where({ :id => b_message.buyer_id }).at(0).last_name %>
-    </td>
-
-    <td>
-      <%= b_message.updated_at.strftime("%b %d, %l:%M%p") %>
-    </td>
-  </tr>
+    </tr>
     <% end %>
-</table>
+  </table>
+
+  <% else %>
+
+  <div> You have no messages as the seller </div>
+
+  <% end %>
+
+  <hr>
+
+  <div><h3> Messages as buyer</h3></div>
+
+  <% if @buyer_unique_messages.at(0) != nil %>
+
+  <table border="1">
+    <tr>
+      <th>
+        Item
+      </th>
+
+      <th>
+        Seller
+      </th>
+
+      <th>
+        Date of last message
+      </th>
+    </tr>
+
+  <% @buyer_unique_messages.each do | b_message | %>
+
+    <tr>
+      <td>
+        <%= Item.where({ :id => b_message.item_id }).at(0).name %>
+      </td>
+      
+      <td>
+        <%= User.where({ :id => b_message.buyer_id }).at(0).first_name %> <%= User.where({ :id => b_message.buyer_id }).at(0).last_name %>
+      </td>
+
+      <td>
+        <%= b_message.updated_at.strftime("%b %d, %l:%M%p") %>
+      </td>
+    </tr>
+
+  <% end %>
+
+  </table>
+
+  <% else %>
+
+  <div> You have no messages as the buyer </div>
+
+  <% end %>
 
 <% else %>
 

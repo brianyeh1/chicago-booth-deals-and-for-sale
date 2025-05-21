@@ -29,10 +29,10 @@ class MessageController < ApplicationController
         Message.where({ :seller_id => @user_id, :item_id => item, :updated_at => ts }).at(0)
       end
 
-      buyer_updates = Message.where({ :buyer_id => @user_id }).group(:item_id).maximum(:updated_at)
-      @buyer_unique_messages = buyer_updates.map   do |item, ts|
-        Message.where({ :buyer_id => @user_id, :item_id => item, :updated_at => ts }).at(0)
-      end
+    buyer_updates = Message.where({ :buyer_id => @user_id }).group(:item_id).maximum(:updated_at)
+    @buyer_unique_messages = buyer_updates.map   do |item, ts|
+      Message.where({ :buyer_id => @user_id, :item_id => item, :updated_at => ts }).at(0)
+    end
 
     render({ :template => "message/inbox" })
   end

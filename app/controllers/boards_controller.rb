@@ -16,6 +16,25 @@ class BoardsController < ApplicationController
     render({ :template => "items/mylisting" })
   end
 
+  def savelisting
+    the_id = params.fetch("path_id")
+    the_item = Item.where({ :id => the_id }).at(0)
+    save = Save.new
+    save.user_id = current_user.id
+    save.item_id = the_item.id
+    save.save
+    redirect_to("/item/#{the_item.id}", { :notice => "Listing added to 'My listing'"} )
+  end
+
+  def viewsavedlisting
+    user_id = current_user.id
+    matching_save = Save.where({ :user_id => user_id})
+    matching_save.each do |a_item|
+    @list_of_items = matching_items.order({ :created_at => :desc })
+
+    render({ :template => "items/savedlisting" })
+  end
+
   def add
     render({ :template => "items/add" })
   end

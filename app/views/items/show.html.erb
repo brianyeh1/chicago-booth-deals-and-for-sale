@@ -34,3 +34,5 @@
 <div> <b>Delivery method:</b> <%= @the_item.delivery_method %> </div>
 
 <div> <b>Last updated:</b> <%= @the_item.updated_at.strftime("%b %d, %l:%M%p") %> </div>
+
+<div> <a href="/save_listing/<%= @the_item.id %>">Save this listing</a>

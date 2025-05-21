@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 #Listing pages
 root to: "boards#index"
 get("/my_listing", { :controller => "boards", :action => "mylisting"})
-get("/my_listing", { :controller => "boards", :action => "savedlisting"})
+get("/save_listing/:path_id", { :controller => "boards", :action => "savelisting"})
+get("/saved_listing", { :controller => "boards", :action => "viewsavedlisting"})
 get("/search_result", { :controller => "boards", :action => "search" })
 
 #Create new listing

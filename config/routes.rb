@@ -7,6 +7,7 @@ get("/my_listing", { :controller => "boards", :action => "mylisting"})
 get("/save_listing/:path_id", { :controller => "boards", :action => "savelisting"})
 get("/saved_listing", { :controller => "boards", :action => "viewsavedlisting"})
 get("/search_result", { :controller => "boards", :action => "search" })
+get("/category/:path_id", { :controller => "boards", :action => "category" })
 
 #Create new listing
 

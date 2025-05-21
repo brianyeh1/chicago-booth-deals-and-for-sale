@@ -1,0 +1,75 @@
+<div>
+  <div>
+    <h1>
+      <%= @Category %> listings
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <% if current_user != nil %>
+      <a href="/new_listing" class="btn btn-success"> Create a new listing </a>
+    <% else %>
+      <div> <a href="/users/sign_in/" class="btn btn-success"
+      onclick="return confirm('Sign in to create a new listing');"
+      >Create a new listing</a>
+    <% end %>
+
+  </div>
+</div>
+
+<hr>
+
+<table border="1">
+  <tr>
+    <th>
+      Category
+    </th>
+
+    <th>
+      Item
+    </th>
+
+    <th>
+      Picture
+    </th>
+
+    <th>
+      Price
+    </th>
+
+    <th>
+    Last updated
+    </th>
+
+  </tr>
+
+<% @list_of_items.each do |a_item| %>
+
+<tr>
+      <td>
+        <%= a_item.category %>
+      </td>
+      
+      <td>
+        <a href="/item/<%=a_item.id%>"><%= a_item.name %></a>
+      </td>
+
+      <td>
+        <img src="<%= a_item.picture_1_url %>" height="100px">
+      </td>
+
+      <td>
+        <%= a_item.price.to_fs(:currency) %>
+      </td>
+
+      <td>
+        <%= a_item.updated_at.strftime("%b %d, %l:%M%p") %>
+      </td>
+
+    </tr>
+  <% end %>
+</table>

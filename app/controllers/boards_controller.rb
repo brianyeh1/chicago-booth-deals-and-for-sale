@@ -2,16 +2,25 @@ class BoardsController < ApplicationController
   def index
     matching_items = Item.all
 
-    @list_of_items = matching_items.order({ :created_at => :desc })
+    @list_of_items = matching_items.order({ :updated_at => :desc })
 
     render({ :template => "items/index" })
+  end
+
+  def category
+    @the_category = params.fetch("path_id")
+    matching_items = Item.where({ :category => @the_category})
+
+    @list_of_items = matching_items.order({ :updated_at => :desc })
+
+    render({ :template => "items/category" })
   end
 
   def mylisting
     seller_id = current_user.id
     matching_items = Item.where({ :seller_id => seller_id})
 
-    @list_of_items = matching_items.order({ :created_at => :desc })
+    @list_of_items = matching_items.order({ :updated_at => :desc })
 
     render({ :template => "items/mylisting" })
   end
@@ -28,7 +37,7 @@ class BoardsController < ApplicationController
 
   def viewsavedlisting
     user_id = User.where({ :id => current_user.id}).at(0)
-    @list_of_items = user_id.user.order({ :created_at => :desc })
+    @list_of_items = user_id.user.order({ :updated_at => :desc })
 
     render({ :template => "items/savedlisting" })
   end

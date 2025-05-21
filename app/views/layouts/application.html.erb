@@ -14,30 +14,67 @@
   </head>
 
   <body>
-    <nav>
-      <a href="/">All listings</a>
-      
-      <%= search_form_for(@q, { :url => search_result_path, :method => :get }) do |f| %>
-  
-          <%= f.label(:name_or_description_cont, "Search for") %>
-          <%= f.text_field(:name_or_description_cont, { :placeholder => "e.g., Pickleball paddles" }) %>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Booth deals & for sale</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">All listings</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Categories
+              </a>
+              <ul class="dropdown-menu">
+              <% Category.order({ :category => :asc }).each do |a_category| %>
+                <li><a class="dropdown-item" href="/category/<%= a_category.category %>"><%= a_category.category %></a></li>
+               <% end %>
+              </ul>
+            </li>
+            <% if current_user != nil %>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/my_listing">My listings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/saved_listing">Saved listings</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Account
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/users/edit">Edit profile</a></li>
+                <li><a class="dropdown-item" href="/users/sign_out">Sign out</a></li>
+              </ul>
+            </li>
+            <% else %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Account
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/users/sign_in">Sign in</a></li>
+                <li><a class="dropdown-item" href="/users/sign_up">Sign up</a></li>
+              </ul>
+            </li>
+            <% end %>
+          </ul>
+            <%= search_form_for(@q, { :url => search_result_path, :method => :get }) do |f| %>
+        
+                <%= f.label(:name_or_description_cont, "Search for") %>
+                <%= f.text_field(:name_or_description_cont, { :placeholder => "e.g., Pickleball paddles" }) %>
 
-        <%= f.submit("Search", { :class => "btn btn-outline-primary" }) %>
-      <% end %>
-
-      <% if current_user != nil %>
-      <a href="/my_listing">My listing</a>
-      <a href="/saved_listing">Saved listing</a>
-      <a href="/users/edit">Edit profile</a>
-      <a href="/users/sign_out">Sign out</a>
-
-      <% else %>
-
-      <a href="/users/sign_up">Sign up</a>
-      <a href="/users/sign_in">Sign in</a>
-
-      <% end %>
+              <%= f.submit("Search", { :class => "btn btn-outline-primary" }) %>
+            <% end %>
+        </div>
+      </div>
     </nav>
+    
+  
 
     <% if notice.present? %>
       <div style="color: green">
@@ -53,5 +90,6 @@
 
     
     <%= yield %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

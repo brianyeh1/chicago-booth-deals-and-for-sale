@@ -14,7 +14,7 @@
   </head>
 
   <body>
-      <nav>
+    <nav>
       <a href="/">All listings</a>
       
       <%= search_form_for(@q, { :url => search_result_path, :method => :get }) do |f| %>
@@ -22,7 +22,7 @@
           <%= f.label(:name_or_description_cont, "Search for") %>
           <%= f.text_field(:name_or_description_cont, { :placeholder => "e.g., Pickleball paddles" }) %>
 
-        <%= f.submit("Search", { :class => "btn btn-primary" }) %>
+        <%= f.submit("Search", { :class => "btn btn-outline-primary" }) %>
       <% end %>
 
       <% if current_user != nil %>

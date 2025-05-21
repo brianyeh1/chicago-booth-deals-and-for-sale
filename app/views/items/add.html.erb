@@ -14,7 +14,7 @@
     <form action="/create_listing" method="post" enctype="multipart/form-data">
       <div>
         <label for="category">
-          <b>Category:</b>
+          </span><b>Category:</b>   <small class="text-danger"><i>(Required)</i></small>
         </label>
         <select id="category" name="category">
           <% Category.order({ :category => :asc }).each do |a_category| %>
@@ -27,7 +27,7 @@
 
       <div>
         <label for="name">
-          <b>Name:</b>
+          <b>Item:</b>   <small class="text-danger"><i>(Required)</i></small>
         </label>
 
         <input type="text" id="name" name="name">
@@ -43,7 +43,7 @@
 
       <div>
         <label for="Price">
-          <b>Selling price:</b> $
+          <b>Selling price:</b>   <small class="text-danger"><i>(Required)</i></small> $
         </label>
 
         <input type="text" id="price" name="price">

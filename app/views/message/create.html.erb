@@ -17,7 +17,8 @@
 <div>
   <div>
 
-    <b>Item</b>: <%=@matching_item.name %>
+    <div> <b>Item</b>: <%= @matching_item.name %> </div>
+    <div> <b>Seller</b>: <%= @the_seller.first_name %> <%= @the_seller.last_name %> </div>
     <form action="/send_message/<%= @matching_item.id %>" method="post" enctype="multipart/form-data">
       <div>
         <label for="message">

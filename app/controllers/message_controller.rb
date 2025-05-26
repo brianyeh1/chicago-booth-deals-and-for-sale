@@ -3,7 +3,8 @@ class MessageController < ApplicationController
   def create
     @item_id = params.fetch("path_id")
     @matching_item = Item.where({ :id => @item_id }).at(0)
-
+    matching_seller = User.where({ :id => @matching_item.seller_id })
+    @the_seller = matching_seller.at(0)
     render({ :template => "message/create" })
   end
   

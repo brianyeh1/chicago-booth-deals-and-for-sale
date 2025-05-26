@@ -30,9 +30,9 @@ class MessageController < ApplicationController
     the_message.seller_id = params.fetch("seller_id")
     the_item = Item.where({ :id => the_message.item_id }).at(0)
     if the_message.seller_id == current_user.id
-    the_message.seller_message = params.fetch("message")
+      the_message.seller_message = params.fetch("message")
     else
-    the_message.buyer_message = params.fetch("message")
+      the_message.buyer_message = params.fetch("message")
 
       if the_message.valid?
         the_message.save

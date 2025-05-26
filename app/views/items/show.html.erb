@@ -25,12 +25,14 @@
 
     
 
-<div> <b>Category:</b> <%= @the_item.category %> </div>
+<div> <b>Category:</b> <a href="/category/<%= @the_item.category %>"> <%= @the_item.category %></a> </div>
 <div> <b>Price:</b> <%= @the_item.price.to_fs(:currency) %> </div>
 <div> <b>Seller:</b> <%= @the_seller.first_name %> <%= @the_seller.last_name %></div>
 <div><img src="<%= @the_item.picture_1_url %>" height="200px"> <img src="<%= @the_item.picture_2_url %>" height="200px"> <img src="<%= @the_item.picture_3_url %>" height="200px"> <img src="<%= @the_item.picture_4_url %>" height="200px"> <img src="<%= @the_item.picture_5_url %>" height="200px"></div>
 
-<div> <b>Description:</b> <%= @the_item.description %> </div>
+<hr>
+
+<div class="preserve-lines" style="margin-bottom:20px"> <%= @the_item.description %> </div>
 
 <div> <b>Payment method:</b> <%= @the_item.payment_method %> </div>
 

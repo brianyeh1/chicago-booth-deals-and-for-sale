@@ -16,17 +16,40 @@
         html {
           min-height: 100%;
         }
+
         .header {
         margin-top: 10px
         }
+
         .main-container {
         max-width: 1500px;
         margin: auto;
         }
+
         .right-button {
         display: flex;
         justify-content: flex-end;
+        margin-bottom: 10px
         }
+
+        table.fixed { 
+        table-layout: fixed;
+        width: 100%;    /* or whatever total width you want */
+        }
+
+        table.fixed td, 
+
+        table.fixed th {
+          padding: 4px;
+          overflow: hidden;  /* ensures long text will wrap or be ellipsized */
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .preserve-lines {
+        white-space: pre-line;
+        }
+
     </style>
   </head>
 
@@ -94,13 +117,13 @@
   
 
     <% if notice.present? %>
-      <div style="color: green">
+      <div class="main-container" style="color: green">
         <%= notice %>
       </div>
     <% end %>
 
     <% if alert.present? %>
-      <div style="color: red">
+      <div class="main-container" style="color: red">
         <%= alert %>
       </div>
     <% end %>

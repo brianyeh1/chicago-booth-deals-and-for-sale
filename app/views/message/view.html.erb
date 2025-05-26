@@ -2,13 +2,54 @@
 <div>
   <div class="header">
     <h1>
-      Message for "<%= @the_item.name %>"
+      Messages for "<a href="/item/<%=@the_item.id%>"><%= @the_item.name %></a>"
     </h1>
   </div>
 </div>
 
 <hr>
 
+<% if @the_messages.at(0).buyer_id == current_user.id %>
 
+  <% @the_messages.each do |a_message| %>
+
+    <% if a_message.seller_message.present? %>
+      <div>
+        <div> <%= a_message.seller_message %> </div>
+        <div> <b><%= User.where({ :id => a_message.seller_id }).at(0).first_name %> <%= User.where({ :id => a_message.seller_id }).at(0).last_name %></b>, <i>Sent at <%= a_message.updated_at.strftime("%b %d, %l:%M%p") %></i></div>
+      </div>
+
+    <% elsif a_message.buyer_message.present? %>
+      <div>
+        <div> <%= a_message.buyer_message %> </div>
+        <div> <b><%= User.where({ :id => a_message.buyer_id }).at(0).first_name %> <%= User.where({ :id => a_message.buyer_id }).at(0).last_name %></b>, <i>Sent at <%= a_message.updated_at.strftime("%b %d, %l:%M%p") %></i></div>
+      </div>
+
+    <% end %>
+  <% end %>
+
+<% elsif @the_messages.at(0).seller_id == current_user.id %>
+
+  <% @the_messages.each do |b_message| %>
+
+    <% if b_message.seller_message.present? %>
+      <div>
+        <div> <%= b_message.seller_message %> </div>
+        <div> <b><%= User.where({ :id => b_message.seller_id }).at(0).first_name %> <%= User.where({ :id => b_message.seller_id }).at(0).last_name %></b>, <i>Sent at <%= b_message.updated_at.strftime("%b %d, %l:%M%p") %></i></div>
+      </div>
+
+    <% elsif b_message.buyer_message.present? %>
+      <div>
+        <div> <%= b_message.buyer_message %> </div>
+        <div> <b><%= User.where({ :id => b_message.buyer_id }).at(0).first_name %> <%= User.where({ :id => b_message.buyer_id }).at(0).last_name %></b>, <i>Sent at <%= b_message.updated_at.strftime("%b %d, %l:%M%p") %>/i></div>
+      </div>
+    <% end %>
+  <% end %>
+
+<% else %>
+
+  <div> You do not have any messages for this item. </div>
+
+<% end %>
 
 </div>

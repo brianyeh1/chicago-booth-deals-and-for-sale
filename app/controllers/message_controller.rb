@@ -40,18 +40,9 @@ class MessageController < ApplicationController
 
   def view
   item_id = params.fetch("path_id")
-  @the_item = Item.where({} :id => item_id })
-  @message = Message.where({ :seller_id => @user_id }).group(:item_id).maximum(:updated_at)
-  @seller_unique_messages = seller_updates.map   do |item, ts|
-      Message.where({ :seller_id => @user_id, :item_id => item, :updated_at => ts }).at(0)
-    end
-
-  buyer_updates = Message.where({ :buyer_id => @user_id }).group(:item_id).maximum(:updated_at)
-  @buyer_unique_messages = buyer_updates.map   do |item, ts|
-    Message.where({ :buyer_id => @user_id, :item_id => item, :updated_at => ts }).at(0)
-  end
-
-  render({ :template => "message/inbox" })
+  @the_item = Item.where({ :id => item_id }).at(0)
+  @the_messages = Message.where({ :item_id => item_id }).order({ :updated_at => :asc })
+  render({ :template => "message/view" })
   end
 
 end

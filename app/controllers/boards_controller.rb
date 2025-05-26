@@ -17,15 +17,22 @@ class BoardsController < ApplicationController
   end
 
   def mylisting
+    if current_user == nil
+      redirect_to("/users/sign_in", { :alert => "Please sign in to see your listing"} )
+    else
     seller_id = current_user.id
     matching_items = Item.where({ :seller_id => seller_id})
 
     @list_of_items = matching_items.order({ :updated_at => :desc })
 
     render({ :template => "items/mylisting" })
+    end
   end
 
   def savelisting
+    if current_user == nil
+      redirect_to("/users/sign_in", { :alert => "Please sign in save a listing"} )
+    else
     the_id = params.fetch("path_id")
     the_item = Item.where({ :id => the_id }).at(0)
     save = Save.new
@@ -33,13 +40,18 @@ class BoardsController < ApplicationController
     save.item_id = the_item.id
     save.save
     redirect_to("/item/#{the_item.id}", { :notice => "Listing added to 'My listing'"} )
+    end
   end
 
   def viewsavedlisting
+    if current_user == nil
+      redirect_to("/users/sign_in", { :alert => "Please sign in to see your saved listing"} )
+    else
     user_id = User.where({ :id => current_user.id}).at(0)
     @list_of_items = user_id.user.order({ :updated_at => :desc })
 
     render({ :template => "items/savedlisting" })
+    end
   end
 
   def add
@@ -137,12 +149,20 @@ def update
   end
 
   def destroy
-    the_id = params.fetch("path_id")
-    the_item = Item.where({ :id => the_id }).at(0)
+    if current_user == nil
+      redirect_to("/users/sign_in", { :alert => "Please sign in to delete your listing"} )
+    else
+      the_id = params.fetch("path_id")
+      the_item = Item.where({ :id => the_id }).at(0)
 
-    the_item.destroy
+      if current_user.id == the_item.seller_id
+        the_item.destroy
 
-    redirect_to("/", { :notice => "Listing deleted successfully."} )
+        redirect_to("/", { :notice => "Listing deleted successfully."} )
+      else
+        redirect_to("/item/#{the_item.id}", { :alert => "You cannot delete a listing that you're not the seller of"})
+      end
+    end
   end
 
   def search

@@ -9,116 +9,122 @@
 
 <hr>
 
-<% if current_user.id == @the_item.seller_id%>
+<% if current_user != nil %>
+  <% if current_user.id == @the_item.seller_id%>
 
-<div>
-  <div>
+    <div>
+      <div>
 
-    <form class="form-grid" action="/modify_listing/<%= @the_item.id %>" method="post" enctype="multipart/form-data">
+        <form class="form-grid" action="/modify_listing/<%= @the_item.id %>" method="post" enctype="multipart/form-data">
 
-        <label for="category">
-          <b>Category:</b>   <small class="text-danger"><i>(Required)</i></small>
-        </label>
-        <select id="category" name="category">
-          <% Category.order({ :category => :asc }).each do |a_category| %>
-            <option value="<%= a_category.category %>">
-              <%= a_category.category %>
-            </option>
-          <% end %>
-        </select>
-
-
-
-        <label for="name">
-          <b>Item:</b>   <small class="text-danger"><i>(Required)</i></small>
-        </label>
-
-        <input type="text" id="name" name="name" value="<%= @the_item.name %>">
+            <label for="category">
+              <b>Category:</b>   <small class="text-danger"><i>(Required)</i></small>
+            </label>
+            <select id="category" name="category">
+              <% Category.order({ :category => :asc }).each do |a_category| %>
+                <option value="<%= a_category.category %>">
+                  <%= a_category.category %>
+                </option>
+              <% end %>
+            </select>
 
 
 
-        <label for="Price">
-          <b>Selling price:</b>   <small class="text-danger"><i>(Required)</i></small>
-        </label>
+            <label for="name">
+              <b>Item:</b>   <small class="text-danger"><i>(Required)</i></small>
+            </label>
 
-        <input type="text" id="price" name="price" value="<%= @the_item.price %>">
-
-
-
-        <label for="description">
-          <b>Item description:</b>
-        </label>
-
-        <textarea id="description" name="description" cols="50" rows="5"><%= @the_item.description %></textarea>
- 
-
-
-        <label for="picture_1">
-          <b>Upload listing cover picture:</b>
-        </label>
-
-        <input type="file" id="picture_1" name="picture_1">
+            <input type="text" id="name" name="name" value="<%= @the_item.name %>">
 
 
 
-        <label for="picture_2">
-          <b>Upload picture 2:</b>
-        </label>
+            <label for="Price">
+              <b>Selling price:</b>   <small class="text-danger"><i>(Required)</i></small>
+            </label>
 
-        <input type="file" id="picture_2" name="picture_2">
-
-
-
-        <label for="picture_3">
-          <b>Upload picture 3:</b>
-        </label>
-
-        <input type="file" id="picture_3" name="picture_3">
+            <input type="text" id="price" name="price" value="<%= @the_item.price %>">
 
 
 
-        <label for="picture_4">
-          <b>Upload picture 4:</b>
-        </label>
+            <label for="description">
+              <b>Item description:</b>
+            </label>
 
-        <input type="file" id="picture_4" name="picture_4">
-
-
-
-        <label for="picture_5">
-          <b>Upload picture 5:</b>
-        </label>
-
-        <input type="file" id="picture_5" name="picture_5">
+            <textarea id="description" name="description" cols="50" rows="5"><%= @the_item.description %></textarea>
+    
 
 
+            <label for="picture_1">
+              <b>Upload listing cover picture:</b>
+            </label>
 
-        <label for="payment_method">
-          <b>Payment method:</b>
-        </label>
-
-        <input type="text" id="payment_method" name="payment_method" value="<%= @the_item.payment_method %>">
+            <input type="file" id="picture_1" name="picture_1">
 
 
 
-        <label for="delivery_method">
-          <b>Delivery method:</b>
-        </label>
+            <label for="picture_2">
+              <b>Upload picture 2:</b>
+            </label>
 
-        <input type="text" id="delivery_method" name="delivery_method" value="<%= @the_item.delivery_method %>">
+            <input type="file" id="picture_2" name="picture_2">
 
 
-      <button>
-        <b>Update listing</b>
-      </button>
-    </form>
 
-  </div>
-</div>
+            <label for="picture_3">
+              <b>Upload picture 3:</b>
+            </label>
+
+            <input type="file" id="picture_3" name="picture_3">
+
+
+
+            <label for="picture_4">
+              <b>Upload picture 4:</b>
+            </label>
+
+            <input type="file" id="picture_4" name="picture_4">
+
+
+
+            <label for="picture_5">
+              <b>Upload picture 5:</b>
+            </label>
+
+            <input type="file" id="picture_5" name="picture_5">
+
+
+
+            <label for="payment_method">
+              <b>Payment method:</b>
+            </label>
+
+            <input type="text" id="payment_method" name="payment_method" value="<%= @the_item.payment_method %>">
+
+
+
+            <label for="delivery_method">
+              <b>Delivery method:</b>
+            </label>
+
+            <input type="text" id="delivery_method" name="delivery_method" value="<%= @the_item.delivery_method %>">
+
+
+          <button>
+            <b>Update listing</b>
+          </button>
+        </form>
+
+      </div>
+    </div>
+
+  <% else %>
+
+    <div><i> Error: You cannot edit a listing that you are not a seller for.</i></div>
+  <% end %>
 
 <% else %>
 
-<div><i> Error: You cannot edit a listing that you are not a seller for.</i></div>
-<% end %>
+  <div> Please <a href="/users/sign_in/">sign in</a> to edit this listing.</div>
 
+<% end %>
 </div>

@@ -50,6 +50,20 @@
         white-space: pre-line;
         }
 
+        .form-grid {
+          display: grid;
+          grid-template-columns: 300px auto;
+          grid-gap: 12px 20px;      /* row-gap column-gap */
+          align-items: center;      /* vertical center on each row */
+        }
+        .form-grid label {
+          justify-self: start;
+          font-weight: bold;
+        }
+        .form-grid .full-width {
+          grid-column: 2;           /* place the button in column 2 */
+        }
+
     </style>
   </head>
 

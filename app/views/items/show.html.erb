@@ -34,9 +34,19 @@
 
 <div class="preserve-lines" style="margin-bottom:20px"> <%= @the_item.description %> </div>
 
+<% if @the_item.payment_method != nil %>
+
 <div> <b>Payment method:</b> <%= @the_item.payment_method %> </div>
 
+<% else %>
+<% end %>
+
+<% if @the_item.delivery_method != nil %>
+
 <div> <b>Delivery method:</b> <%= @the_item.delivery_method %> </div>
+
+<% else %>
+<% end %>
 
 <div> <b>Last updated:</b> <%= @the_item.updated_at.strftime("%b %d, %l:%M%p") %> </div>
 

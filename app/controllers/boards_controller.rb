@@ -78,7 +78,9 @@ class BoardsController < ApplicationController
     if params.fetch("picture_5", nil)
     the_item.picture_5 = params.fetch("picture_5")
     end
-    the_item.price = params.fetch("price").to_f
+    raw_price = params.fetch("price")
+    cleaned_price = raw_price.delete("$")
+    the_item.price = cleaned_price.to_f
     the_item.payment_method = params.fetch("payment_method")
     the_item.delivery_method = params.fetch("delivery_method")
     the_item.seller_id = current_user.id
@@ -119,7 +121,9 @@ def update
     if params.fetch("picture_5", nil)
     the_item.picture_5 = params.fetch("picture_5")
     end
-    the_item.price = params.fetch("price").to_f
+    raw_price = params.fetch("price")
+    cleaned_price = raw_price.delete("$")
+    the_item.price = cleaned_price.to_f
     the_item.payment_method = params.fetch("payment_method")
     the_item.delivery_method = params.fetch("delivery_method")
     the_item.seller_id = current_user.id

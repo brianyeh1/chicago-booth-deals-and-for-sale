@@ -14,8 +14,8 @@
 <div>
   <div>
 
-    <form action="/modify_listing/<%= @the_item.id %>" method="post" enctype="multipart/form-data">
-      <div>
+    <form class="form-grid" action="/modify_listing/<%= @the_item.id %>" method="post" enctype="multipart/form-data">
+
         <label for="category">
           <b>Category:</b>   <small class="text-danger"><i>(Required)</i></small>
         </label>
@@ -26,87 +26,87 @@
             </option>
           <% end %>
         </select>
-      </div>
 
-      <div>
+
+
         <label for="name">
           <b>Item:</b>   <small class="text-danger"><i>(Required)</i></small>
         </label>
 
         <input type="text" id="name" name="name" value="<%= @the_item.name %>">
-      </div>
 
-      <div>
+
+
         <label for="Price">
-          <b>Selling price:</b>   <small class="text-danger"><i>(Required)</i></small> $
+          <b>Selling price:</b>   <small class="text-danger"><i>(Required)</i></small>
         </label>
 
         <input type="text" id="price" name="price" value="<%= @the_item.price %>">
-      </div>
 
-      <div>
+
+
         <label for="description">
           <b>Item description:</b>
         </label>
 
         <textarea id="description" name="description" cols="50" rows="5"><%= @the_item.description %></textarea>
-      </div>
+ 
 
-      <div>
+
         <label for="picture_1">
           <b>Upload listing cover picture:</b>
         </label>
 
         <input type="file" id="picture_1" name="picture_1">
-      </div>
 
-      <div>
+
+
         <label for="picture_2">
           <b>Upload picture 2:</b>
         </label>
 
         <input type="file" id="picture_2" name="picture_2">
-      </div>
 
-      <div>
+
+
         <label for="picture_3">
           <b>Upload picture 3:</b>
         </label>
 
         <input type="file" id="picture_3" name="picture_3">
-      </div>
 
-      <div>
+
+
         <label for="picture_4">
           <b>Upload picture 4:</b>
         </label>
 
         <input type="file" id="picture_4" name="picture_4">
-      </div>
 
-      <div>
+
+
         <label for="picture_5">
           <b>Upload picture 5:</b>
         </label>
 
         <input type="file" id="picture_5" name="picture_5">
-      </div>
 
-      <div>
+
+
         <label for="payment_method">
           <b>Payment method:</b>
         </label>
 
         <input type="text" id="payment_method" name="payment_method" value="<%= @the_item.payment_method %>">
-      </div>
 
-      <div>
+
+
         <label for="delivery_method">
           <b>Delivery method:</b>
         </label>
 
         <input type="text" id="delivery_method" name="delivery_method" value="<%= @the_item.delivery_method %>">
-      </div>
+
 
       <button>
         <b>Update listing</b>

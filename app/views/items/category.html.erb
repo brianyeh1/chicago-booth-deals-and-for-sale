@@ -5,6 +5,7 @@
       <%= @the_category %> listings
     </h1>
   </div>
+  <i>Only listings updated in the last 90 days will show up here</i>
 </div>
 
 <hr>
@@ -49,11 +50,13 @@
 
   </tr>
 
-<% @list_of_items.each do |a_item| %>
+<% @list_of_items.where({ :updated_at => 90.days.ago..Time.current}).each do |a_item| %>
 
 <tr>
       <td>
-        <%= a_item.category %>
+        <a class="link-dark link-offset-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="/category/<%= a_item.category %>">
+          <%= a_item.category %>
+        </a>
       </td>
       
       <td>

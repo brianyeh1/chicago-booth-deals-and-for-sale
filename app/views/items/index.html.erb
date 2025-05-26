@@ -1,5 +1,6 @@
+<div class="main-container">
 <div>
-  <div>
+  <div class="header">
     <h1>
       All listings
     </h1>
@@ -10,19 +11,18 @@
 <hr>
 
 <div>
-  <div>
+  <div class="right-button">
     <% if current_user != nil %>
       <a href="/new_listing" class="btn btn-success"> Create a new listing </a>
     <% else %>
       <div> <a href="/users/sign_in/" class="btn btn-success"
       onclick="return confirm('Sign in to create a new listing');"
       >Create a new listing</a>
+      </div>
     <% end %>
 
   </div>
 </div>
-
-<hr>
 
 <% if @list_of_items.at(0) != nil %>
 
@@ -82,3 +82,5 @@
 There is no listing
 
 <% end %>
+
+</div>

@@ -1,11 +1,12 @@
+<div class="main-container">
 <div>
-  <div>
+  <div class="header">
     <h1>
       <%= @the_item.name %>
     </h1>
 
 <hr>
-    <div>
+    <div class="right-button">
     <% if current_user.id == @the_item.seller_id %>
       <div>
         <a href="/current_listing/<%= @the_item.id %>" class="btn btn-warning">
@@ -37,6 +38,7 @@
 
 <div> <b>Last updated:</b> <%= @the_item.updated_at.strftime("%b %d, %l:%M%p") %> </div>
 
+<div style= "margin-top: 10px">
 <% if current_user.id == @the_item.seller_id %>
   <div>
 <% elsif%>
@@ -54,3 +56,7 @@
   onclick="return confirm('Sign in to save this listing');"
   >Save this listing</a></div>
 <% end %>
+
+</div>
+
+</div>

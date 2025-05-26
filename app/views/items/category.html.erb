@@ -1,5 +1,6 @@
+<div class="main-container">
 <div>
-  <div>
+  <div class="header">
     <h1>
       <%= @the_category %> listings
     </h1>
@@ -9,7 +10,7 @@
 <hr>
 
 <div>
-  <div>
+  <div class="right-button">
     <% if current_user != nil %>
       <a href="/new_listing" class="btn btn-success"> Create a new listing </a>
     <% else %>
@@ -21,7 +22,6 @@
   </div>
 </div>
 
-<hr>
 
 <% if @list_of_items.at(0) != nil %>
 
@@ -81,3 +81,5 @@
 There is no listing
 
 <% end %>
+
+</div>

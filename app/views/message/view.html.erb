@@ -46,13 +46,10 @@
     <div>
       <form class="reply-form" style="margin-bottom: 20px" action="/reply/<%= @the_item.id %>" method="post" enctype="multipart/form-data">
         <div>
-          <label for="message">
-          </label>
-
+          <label for="message"></label>
           <textarea id="message" name="message" cols="50" rows="5" placeholder="Enter your message..."></textarea>
           
           <input type="hidden" id="buyer_id" name="buyer_id" value="<%= @the_messages.at(0).buyer_id %>">
-          
           <input type="hidden" id="seller_id" name="seller_id" value="<%= @the_messages.at(0).seller_id %>">
         </div>
 
@@ -77,7 +74,7 @@
       </div>
       <div style="display: flex; justify-content: flex-end">
         <div class="sent-message" style="margin-bottom: 20px">
-          <b><%= User.where({ :id => b_message.seller_id }).at(0).first_name %> <%= User.where({ :id => b_message.seller_id }).at(0).last_name %></b>,&nbsp;<i>Sent at <%= b_message.updated_at.strftime("%b %d, %l:%M%p") %></i></div>
+          <b><%= User.where({ :id => b_message.seller_id }).at(0).first_name %> <%= User.where({ :id => b_message.seller_id }).at(0).last_name %></b>,&nbsp;<i>Sent at <%= b_message.updated_at.strftime("%b %d, %l:%M%p") %></i>
         </div>
       </div>
   
@@ -101,13 +98,10 @@
     <div>
       <form class="reply-form" style="margin-bottom: 20px" action="/reply/<%= @the_item.id %>" method="post" enctype="multipart/form-data">
         <div>
-          <label for="message">
-          </label>
-
+          <label for="message"></label>
           <textarea id="message" name="message" cols="50" rows="5" placeholder="Enter your message..."></textarea>
           
           <input type="hidden" id="buyer_id" name="buyer_id" value="<%= @the_messages.at(0).buyer_id %>">
-          
           <input type="hidden" id="seller_id" name="seller_id" value="<%= @the_messages.at(0).seller_id %>">
         </div>
 

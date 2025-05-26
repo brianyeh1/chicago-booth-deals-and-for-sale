@@ -60,7 +60,7 @@
 
   <% if @buyer_unique_messages.at(0) != nil %>
 
-  <table border="1">
+  <table class="fixed" border="1">
     <tr>
       <th>
         Item
@@ -79,11 +79,11 @@
 
     <tr>
       <td>
-        <%= Item.where({ :id => b_message.item_id }).at(0).name %>
+        <a href="/view_message/<%= b_message.item_id%>"> <%= Item.where({ :id => b_message.item_id }).at(0).name %> </a>
       </td>
       
       <td>
-        <%= User.where({ :id => b_message.buyer_id }).at(0).first_name %> <%= User.where({ :id => b_message.buyer_id }).at(0).last_name %>
+        <%= User.where({ :id => b_message.seller_id }).at(0).first_name %> <%= User.where({ :id => b_message.seller_id }).at(0).last_name %>
       </td>
 
       <td>

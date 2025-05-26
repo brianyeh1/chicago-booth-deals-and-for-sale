@@ -14,37 +14,110 @@
   <% @the_messages.each do |a_message| %>
 
     <% if a_message.seller_message.present? %>
-      <div>
-        <div> <%= a_message.seller_message %> </div>
-        <div> <b><%= User.where({ :id => a_message.seller_id }).at(0).first_name %> <%= User.where({ :id => a_message.seller_id }).at(0).last_name %></b>, <i>Sent at <%= a_message.updated_at.strftime("%b %d, %l:%M%p") %></i></div>
+      <div style="display: flex; justify-content: flex-start">
+        <div class="received-message border border-secondary-subtle p-3 mb-2 bg-secondary-subtle text-secondary-emphasis" style="padding: 10px">
+          <%= a_message.seller_message %>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: flex-start">
+        <div class="received-message" style="margin-bottom: 20px">
+          <b><%= User.where({ :id => a_message.seller_id }).at(0).first_name %> <%= User.where({ :id => a_message.seller_id }).at(0).last_name %></b>,&nbsp;<i>Sent at <%= a_message.updated_at.strftime("%b %d, %l:%M%p") %></i>
+        </div>
       </div>
 
     <% elsif a_message.buyer_message.present? %>
-      <div>
-        <div> <%= a_message.buyer_message %> </div>
-        <div> <b><%= User.where({ :id => a_message.buyer_id }).at(0).first_name %> <%= User.where({ :id => a_message.buyer_id }).at(0).last_name %></b>, <i>Sent at <%= a_message.updated_at.strftime("%b %d, %l:%M%p") %></i></div>
+      <div style="display: flex; justify-content: flex-end">
+        <div class="sent-message border border-info-subtle p-3 mb-2 bg-info-subtle text-info-emphasis" style="padding: 10px">
+          <%= a_message.buyer_message %>
+        </div>
       </div>
-
+      <div style="display: flex; justify-content: flex-end">
+        <div class="sent-message" style="margin-bottom: 20px"> 
+          <b><%= User.where({ :id => a_message.buyer_id }).at(0).first_name %> <%= User.where({ :id => a_message.buyer_id }).at(0).last_name %></b>,&nbsp;<i>Sent at <%= a_message.updated_at.strftime("%b %d, %l:%M%p") %></i>
+        </div>
+      </div>
     <% end %>
+
   <% end %>
+
+  <hr>
+  <div>
+    <h2> Reply to this message </h2>
+    <div>
+      <form class="reply-form" style="margin-bottom: 20px" action="/reply/<%= @the_item.id %>" method="post" enctype="multipart/form-data">
+        <div>
+          <label for="message">
+          </label>
+
+          <textarea id="message" name="message" cols="50" rows="5" placeholder="Enter your message..."></textarea>
+          
+          <input type="hidden" id="buyer_id" name="buyer_id" value="<%= @the_messages.at(0).buyer_id %>">
+          
+          <input type="hidden" id="seller_id" name="seller_id" value="<%= @the_messages.at(0).seller_id %>">
+        </div>
+
+        <button>
+          <b>Send message</b>
+        </button>
+      </form>
+
+    </div>
+  </div>
+
 
 <% elsif @the_messages.at(0).seller_id == current_user.id %>
 
   <% @the_messages.each do |b_message| %>
 
     <% if b_message.seller_message.present? %>
-      <div>
-        <div> <%= b_message.seller_message %> </div>
-        <div> <b><%= User.where({ :id => b_message.seller_id }).at(0).first_name %> <%= User.where({ :id => b_message.seller_id }).at(0).last_name %></b>, <i>Sent at <%= b_message.updated_at.strftime("%b %d, %l:%M%p") %></i></div>
+      <div style="display: flex; justify-content: flex-end">
+        <div class="sent-message border border-info-subtle p-3 mb-2 bg-info-subtle text-info-emphasis" style="padding: 10px">
+          <%= b_message.seller_message %>
+        </div>
       </div>
-
+      <div style="display: flex; justify-content: flex-end">
+        <div class="sent-message" style="margin-bottom: 20px">
+          <b><%= User.where({ :id => b_message.seller_id }).at(0).first_name %> <%= User.where({ :id => b_message.seller_id }).at(0).last_name %></b>,&nbsp;<i>Sent at <%= b_message.updated_at.strftime("%b %d, %l:%M%p") %></i></div>
+        </div>
+      </div>
+  
     <% elsif b_message.buyer_message.present? %>
-      <div>
-        <div> <%= b_message.buyer_message %> </div>
-        <div> <b><%= User.where({ :id => b_message.buyer_id }).at(0).first_name %> <%= User.where({ :id => b_message.buyer_id }).at(0).last_name %></b>, <i>Sent at <%= b_message.updated_at.strftime("%b %d, %l:%M%p") %>/i></div>
+      <div style="display: flex; justify-content: flex-start">
+        <div class="received-message border border-secondary-subtle p-3 mb-2 bg-secondary-subtle text-secondary-emphasis" style="padding: 10px">
+          <%= b_message.buyer_message %>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: flex-start">
+        <div class="received-message" style="margin-bottom: 20px"> 
+          <b><%= User.where({ :id => b_message.buyer_id }).at(0).first_name %> <%= User.where({ :id => b_message.buyer_id }).at(0).last_name %></b>,&nbsp;<i>Sent at <%= b_message.updated_at.strftime("%b %d, %l:%M%p") %></i>
+        </div>
       </div>
     <% end %>
   <% end %>
+
+  <hr>
+  <div>
+    <h2> Reply to this message </h2>
+    <div>
+      <form class="reply-form" style="margin-bottom: 20px" action="/reply/<%= @the_item.id %>" method="post" enctype="multipart/form-data">
+        <div>
+          <label for="message">
+          </label>
+
+          <textarea id="message" name="message" cols="50" rows="5" placeholder="Enter your message..."></textarea>
+          
+          <input type="hidden" id="buyer_id" name="buyer_id" value="<%= @the_messages.at(0).buyer_id %>">
+          
+          <input type="hidden" id="seller_id" name="seller_id" value="<%= @the_messages.at(0).seller_id %>">
+        </div>
+
+        <button>
+          <b>Send message</b>
+        </button>
+      </form>
+
+    </div>
+  </div>
 
 <% else %>
 

@@ -64,6 +64,24 @@
           grid-column: 2;           /* place the button in column 2 */
         }
 
+        .reply-form textarea,
+        .reply-form button[type="submit"] {
+          display: block;        /* make sure it's a block‐level box */
+          width: 100%;           /* span the full width of the form */
+          box-sizing: border-box;/* include padding/border in that width */
+          margin-bottom: 10px;     /* optional spacing */
+        }
+
+        .received-message {
+        max-width: 700px;
+        border-radius: 10px;
+        }
+
+        .sent-message {
+        max-width: 700px;
+        border-radius: 10px;
+        }
+
     </style>
   </head>
 

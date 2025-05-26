@@ -15,7 +15,7 @@
 
 <% if @seller_unique_messages.at(0) != nil %>
 
-  <table border="1">
+  <table class="fixed" border="1">
     <tr>
       <th>
         Item
@@ -33,7 +33,7 @@
     <% @seller_unique_messages.each do | a_message | %>
     <tr>
       <td>
-        <%= Item.where({ :id => a_message.item_id }).at(0).name %>
+        <a href="/view_message/<%= a_message.item_id%>"> <%= Item.where({ :id => a_message.item_id }).at(0).name %> </a>
       </td>
       
       <td>

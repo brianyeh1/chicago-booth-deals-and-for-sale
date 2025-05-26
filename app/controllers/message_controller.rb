@@ -13,13 +13,33 @@ class MessageController < ApplicationController
     the_message.item_id = params.fetch("path_id")
     the_message.seller_id = Item.where({ :id => the_message.item_id }).at(0).seller_id
     the_message.buyer_id = current_user.id
-    the_message.message = params.fetch("message")
+    the_message.buyer_message = params.fetch("message")
 
     if the_message.valid?
       the_message.save
       redirect_to("/view_message/#{the_message.item_id}", { :notice => "Message sent to seller." })
     else
       redirect_to("/create_message/#{the_message.item_id}", { :alert => the_message.errors.full_messages.to_sentence })
+    end
+  end
+
+  def reply
+    the_message = Message.new
+    the_message.item_id = params.fetch("path_id")
+    the_message.buyer_id = params.fetch("buyer_id")
+    the_message.seller_id = params.fetch("seller_id")
+    the_item = Item.where({ :id => the_message.item_id }).at(0)
+    if the_message.seller_id == current_user.id
+    the_message.seller_message = params.fetch("message")
+    else
+    the_message.buyer_message = params.fetch("message")
+
+      if the_message.valid?
+        the_message.save
+        redirect_to("/view_message/#{the_message.item_id}", { :notice => "Message sent." })
+      else
+        redirect_to("/create_message/#{the_message.item_id}", { :alert => the_message.errors.full_messages.to_sentence })
+      end
     end
   end
 

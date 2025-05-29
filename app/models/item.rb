@@ -14,6 +14,7 @@
 #  picture_4       :string
 #  picture_5       :string
 #  price           :float
+#  status          :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  seller_id       :integer
@@ -22,6 +23,7 @@ class Item < ApplicationRecord
   validates(:name, presence: true)
   validates(:description, presence: true)
   validates(:price, presence: true)
+  validates(:status, presence: true)
   validates(:price, numericality: true)
   mount_uploader :picture_1, Picture1Uploader
   mount_uploader :picture_2, Picture2Uploader

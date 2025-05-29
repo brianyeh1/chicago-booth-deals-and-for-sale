@@ -2,7 +2,7 @@ class BoardsController < ApplicationController
   def index
     matching_items = Item.all
 
-    @list_of_items = matching_items.order({ :updated_at => :desc })
+    @list_of_items = matching_items.where({ :status => "Available" }).order({ :updated_at => :desc })
 
     render({ :template => "items/index" })
   end
@@ -11,7 +11,7 @@ class BoardsController < ApplicationController
     @the_category = params.fetch("path_id")
     matching_items = Item.where({ :category => @the_category})
 
-    @list_of_items = matching_items.order({ :updated_at => :desc })
+    @list_of_items = matching_items.where({ :status => "Available" }).order({ :updated_at => :desc })
 
     render({ :template => "items/category" })
   end
@@ -99,6 +99,7 @@ class BoardsController < ApplicationController
       the_item.payment_method = params.fetch("payment_method")
       the_item.delivery_method = params.fetch("delivery_method")
       the_item.seller_id = current_user.id
+      the_item.status = "Available"
 
       if the_item.valid?
         the_item.save
@@ -160,7 +161,8 @@ def update
       the_item = Item.where({ :id => the_id }).at(0)
 
       if current_user.id == the_item.seller_id
-        the_item.destroy
+        the_item.status = "Deleted"
+        the_item.save
 
         redirect_to("/", { :notice => "Listing deleted successfully."} )
       else
@@ -169,9 +171,45 @@ def update
     end
   end
 
+  def sold
+    if current_user == nil
+      redirect_to("/users/sign_in", { :alert => "Please sign in to change your listing"} )
+    else
+      the_id = params.fetch("path_id")
+      the_item = Item.where({ :id => the_id }).at(0)
+
+      if current_user.id == the_item.seller_id
+        the_item.status = "Sold"
+        the_item.save
+
+        redirect_to("/", { :notice => "Listing marked as sold."} )
+      else
+        redirect_to("/item/#{the_item.id}", { :alert => "You cannot change a listing that you're not the seller of"})
+      end
+    end
+  end
+
+  def reopen
+    if current_user == nil
+      redirect_to("/users/sign_in", { :alert => "Please sign in to change your listing"} )
+    else
+      the_id = params.fetch("path_id")
+      the_item = Item.where({ :id => the_id }).at(0)
+
+      if current_user.id == the_item.seller_id
+        the_item.status = "Available"
+        the_item.save
+
+        redirect_to("/", { :notice => "Listing reopened successfully."} )
+      else
+        redirect_to("/item/#{the_item.id}", { :alert => "You cannot change a listing that you're not the seller of"})
+      end
+    end
+  end
+
   def search
      # params.fetch("q", {}) ensures we always pass a Hash to ransack
-     @q = Item.ransack(params.fetch("q", {}))
+     @q = Item.where({ :status => "Available" }).ransack(params.fetch("q", {}))
      @items = @q.result
      render({ :template => "items/search_result" })
   end

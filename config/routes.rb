@@ -18,6 +18,8 @@ post("/create_listing", { :controller => "boards", :action => "create" })
 get("/current_listing/:path_id", { :controller => "boards", :action => "current"})
 post("/modify_listing/:path_id", { :controller => "boards", :action => "update" })
 get("/delete_listing/:path_id", { :controller => "boards", :action => "destroy" })
+get("/sold_listing/:path_id", { :controller => "boards", :action => "sold" })
+get("/reopen_listing/:path_id", { :controller => "boards", :action => "reopen" })
 
 #Individual item pages
 get("/item/:path_id", { :controller => "boards", :action => "show"})

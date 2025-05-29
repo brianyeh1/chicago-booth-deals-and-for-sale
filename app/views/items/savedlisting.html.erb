@@ -43,6 +43,10 @@
     </th>
 
     <th>
+      Status
+    </th>
+
+    <th>
     Last updated
     </th>
 
@@ -67,6 +71,16 @@
 
       <td>
         <%= a_item.price.to_fs(:currency) %>
+      </td>
+
+      <td>
+        <% if a_item.status == "Available" %>
+          <div class style="color: green"><%= a_item.status %></div>
+        <% elsif a_item.status == "Deleted" %>
+          <div class style="color: red"><%= a_item.status %></div>
+        <% else %>
+          <div class style="color: grey"><%= a_item.status %></div>
+        <% end %>
       </td>
 
       <td>

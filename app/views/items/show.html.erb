@@ -1,75 +1,87 @@
 <div class="main-container">
-<div>
   <div class="header">
     <h1>
       <%= @the_item.name %>
+      <span class="item-status">
+        <% if @the_item.status == "Available" %>
+        <% elsif @the_item.status == "Deleted" %>
+          (<%= @the_item.status %>)
+        <% elsif @the_item.status == "Sold" %>
+          (<%= @the_item.status %>)
+        <% end %>
+      </span>
     </h1>
+  </div>
 
 <hr>
     <div class="right-button">
-    <% if current_user != nil %>
-      <% if current_user.id == @the_item.seller_id %>
-        <div>
-          <a href="/current_listing/<%= @the_item.id %>" class="btn btn-warning">
-          Edit listing
-          </a>
-        
-          <a href="/delete_listing/<%= @the_item.id %>" class="btn btn-danger"
-          onclick="return confirm('Are you sure you want to delete this item?');"
-          >
-            Delete listing
-          </a>
-        </div>
+      <% if current_user != nil %>
+        <% if current_user.id == @the_item.seller_id %>
+          <% if @the_item.status == "Available" %>
+            <div>
+              <a href="/sold_listing/<%= @the_item.id %>" class="btn btn-success">
+              Mark as sold
+              </a>
+              <a href="/current_listing/<%= @the_item.id %>" class="btn btn-warning">
+              Edit listing
+              </a>
+            
+              <a href="/delete_listing/<%= @the_item.id %>" class="btn btn-danger"
+              onclick="return confirm('Are you sure you want to delete this item?');"
+              >
+                Delete listing
+              </a>
+            </div>
+          <% else %>
+            <div>
+              <a href="/reopen_listing/<%= @the_item.id %>" class="btn btn-success">
+              Reopen listing
+              </a>
+            </div>
+          <% end %>
+        <% end %>
       <% end %>
-    <% end %>
     </div>
 
     
 
-<div> <b>Category:</b> <a href="/category/<%= @the_item.category %>"> <%= @the_item.category %></a> </div>
-<div> <b>Price:</b> <%= @the_item.price.to_fs(:currency) %> </div>
-<div> <b>Seller:</b> <%= @the_seller.first_name %> <%= @the_seller.last_name %></div>
-<div><img src="<%= @the_item.picture_1_url %>" height="200px"> <img src="<%= @the_item.picture_2_url %>" height="200px"> <img src="<%= @the_item.picture_3_url %>" height="200px"> <img src="<%= @the_item.picture_4_url %>" height="200px"> <img src="<%= @the_item.picture_5_url %>" height="200px"></div>
+  <div> <b>Category:</b> <a href="/category/<%= @the_item.category %>"> <%= @the_item.category %></a> </div>
+  <div> <b>Price:</b> <%= @the_item.price.to_fs(:currency) %> </div>
+  <div> <b>Seller:</b> <%= @the_seller.first_name %> <%= @the_seller.last_name %></div>
+  <div><img src="<%= @the_item.picture_1_url %>" height="200px"> <img src="<%= @the_item.picture_2_url %>" height="200px"> <img src="<%= @the_item.picture_3_url %>" height="200px"> <img src="<%= @the_item.picture_4_url %>" height="200px"> <img src="<%= @the_item.picture_5_url %>" height="200px"></div>
 
-<hr>
+  <hr>
 
-<div class="preserve-lines" style="margin-bottom:20px"> <%= @the_item.description %> </div>
+  <div class="preserve-lines" style="margin-bottom:20px"> <%= @the_item.description %> </div>
 
-<% if @the_item.payment_method.present? %>
-
-<div> <b>Payment method:</b> <%= @the_item.payment_method %> </div>
-
-<% end %>
-
-<% if @the_item.delivery_method.present? %>
-
-<div> <b>Delivery method:</b> <%= @the_item.delivery_method %> </div>
-
-<% end %>
-
-<div> <b>Last updated:</b> <%= @the_item.updated_at.strftime("%b %d, %l:%M%p") %> </div>
-
-<div style= "margin-top: 10px">
-<% if current_user != nil %>
-  <% if current_user.id == @the_item.seller_id %>
-    <div>
-  <% elsif%>
-    <div><a href="/create_message/<%= @the_item.id %>" class="btn btn-success">Message seller</a>
-  <% else %>
-    <div><a href="/users/sign_in/" class="btn btn-success"
-    onclick="return confirm('Sign in to message the seller');"
-    >Message seller</a>
+  <% if @the_item.payment_method.present? %>
+    <div> <b>Payment method:</b> <%= @the_item.payment_method %> </div>
   <% end %>
-<% end %>
 
-<% if current_user != nil %>
-  <a href="/save_listing/<%= @the_item.id %>" class="btn btn-info">Save this listing</a></div>
-<% else %>
-  <a href="/users/sign_in/" class="btn btn-info"
-  onclick="return confirm('Sign in to save this listing');"
-  >Save this listing</a></div>
-<% end %>
+  <% if @the_item.delivery_method.present? %>
+    <div> <b>Delivery method:</b> <%= @the_item.delivery_method %> </div>
+  <% end %>
 
-</div>
+  <div> <b>Last updated:</b> <%= @the_item.updated_at.strftime("%b %d, %l:%M%p") %> </div>
+
+  <div style= "margin-top: 10px">
+    <% if current_user != nil %>
+      <% if current_user.id == @the_item.seller_id %>
+      <% elsif%>
+        <a href="/create_message/<%= @the_item.id %>" class="btn btn-success">Message seller</a>
+      <% else %>
+        <a href="/users/sign_in/" class="btn btn-success" onclick="return confirm('Sign in to message the seller');">Message seller</a>
+      <% end %>
+    <% end %>
+
+    <% if current_user.id == @the_item.seller_id %>
+    <% elsif current_user != nil %>
+      <a href="/save_listing/<%= @the_item.id %>" class="btn btn-info">Save this listing</a>
+    <% else %>
+      <a href="/users/sign_in/" class="btn btn-info"
+      onclick="return confirm('Sign in to save this listing');"
+      >Save this listing</a>
+    <% end %>
+  </div>
 
 </div>

@@ -11,34 +11,30 @@
 
 <% if current_user.id == @matching_item.seller_id %>
 
-<div>You cannot message yourself for an item you're the seller for!</div>
-
-<% elsif current_user != nil %>
-
-<div>
-  <div>
-
-    <div> <b>Item</b>: <%= @matching_item.name %> </div>
-    <div> <b>Seller</b>: <%= @the_seller.first_name %> <%= @the_seller.last_name %> </div>
-    <form action="/send_message/<%= @matching_item.id %>" method="post" enctype="multipart/form-data">
-      <div>
-        <label for="message">
-        </label>
-
-        <textarea id="message" name="message" cols="50" rows="5" placeholder="Enter your message..."></textarea>
-      </div>
-
-      <button>
-        <b>Send message</b>
-      </button>
-    </form>
-
-  </div>
-</div>
+  <div>You cannot message yourself for an item you're the seller for!</div>
 
 <% else %>
 
-<div> Please <a href="/users/sign_in/">sign in</a> to message the seller.</div>
+  <div>
+    <div>
+
+      <div> <b>Item</b>: <%= @matching_item.name %> </div>
+      <div> <b>Seller</b>: <%= @the_seller.first_name %> <%= @the_seller.last_name %> </div>
+      <form action="/send_message/<%= @matching_item.id %>" method="post" enctype="multipart/form-data">
+        <div>
+          <label for="message">
+          </label>
+
+          <textarea id="message" name="message" cols="50" rows="5" placeholder="Enter your message..."></textarea>
+        </div>
+
+        <button>
+          <b>Send message</b>
+        </button>
+      </form>
+
+    </div>
+  </div>
 
 <% end %>
 

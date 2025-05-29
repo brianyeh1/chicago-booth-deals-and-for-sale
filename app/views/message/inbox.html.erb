@@ -9,8 +9,6 @@
 
 <hr>
 
-<% if current_user.id != nil %>
-
 <div><h3> Messages as seller</h3></div>
 
 <% if @seller_unique_messages.at(0) != nil %>
@@ -48,17 +46,17 @@
     <% end %>
   </table>
 
-  <% else %>
+<% else %>
 
   <div> You have no messages as the seller </div>
 
-  <% end %>
+<% end %>
 
-  <hr>
+<hr>
 
-  <div><h3> Messages as buyer</h3></div>
+<div><h3> Messages as buyer</h3></div>
 
-  <% if @buyer_unique_messages.at(0) != nil %>
+<% if @buyer_unique_messages.at(0) != nil %>
 
   <table class="fixed" border="1">
     <tr>
@@ -95,15 +93,9 @@
 
   </table>
 
-  <% else %>
-
-  <div> You have no messages as the buyer </div>
-
-  <% end %>
-
 <% else %>
 
-<div> Please <a href="/users/sign_in/">sign in</a> to view see your inbox.</div>
+  <div> You have no messages as the buyer </div>
 
 <% end %>
 

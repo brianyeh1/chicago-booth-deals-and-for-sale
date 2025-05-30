@@ -72,15 +72,15 @@
       <% else %>
         <a href="/users/sign_in/" class="btn btn-success" onclick="return confirm('Sign in to message the seller');">Message seller</a>
       <% end %>
-    <% end %>
 
-    <% if current_user.id == @the_item.seller_id %>
-    <% elsif current_user != nil %>
-      <a href="/save_listing/<%= @the_item.id %>" class="btn btn-info">Save this listing</a>
-    <% else %>
-      <a href="/users/sign_in/" class="btn btn-info"
-      onclick="return confirm('Sign in to save this listing');"
-      >Save this listing</a>
+      <% if current_user.id == @the_item.seller_id %>
+      <% elsif current_user != nil %>
+        <a href="/save_listing/<%= @the_item.id %>" class="btn btn-info">Save this listing</a>
+      <% else %>
+        <a href="/users/sign_in/" class="btn btn-info"
+        onclick="return confirm('Sign in to save this listing');"
+        >Save this listing</a>
+      <% end %>
     <% end %>
   </div>
 

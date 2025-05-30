@@ -22,9 +22,12 @@
             </label>
             <select id="category" name="category">
               <% Category.order({ :category => :asc }).each do |a_category| %>
-                <option value="<%= a_category.category %>">
-                  <%= a_category.category %>
-                </option>
+            <option
+              value="<%= a_category.category %>"
+              <%= "selected" if a_category.category == @the_item.category %>
+            >
+              <%= a_category.category %>
+            </option>
               <% end %>
             </select>
 

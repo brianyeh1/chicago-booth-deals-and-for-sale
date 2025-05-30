@@ -28,7 +28,7 @@
       </th>
     </tr>
 
-    <% @seller_unique_messages.each do | a_message | %>
+    <% @seller_unique_messages.sort_by( &:updated_at ).reverse.each do | a_message | %>
     <tr>
       <td>
         <a href="/view_message/<%= a_message.item_id%>"> <%= Item.where({ :id => a_message.item_id }).at(0).name %> </a>
@@ -73,7 +73,7 @@
       </th>
     </tr>
 
-  <% @buyer_unique_messages.each do | b_message | %>
+  <% @buyer_unique_messages.sort_by( &:updated_at ).reverse.each do | b_message | %>
 
     <tr>
       <td>
